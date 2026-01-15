@@ -9,3 +9,5 @@ sqlalchemy
 psycopg2-binary
 pandas
 python-dotenv
+pytest
+pytest-cov
