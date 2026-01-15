@@ -24,3 +24,6 @@ dbt_packages/
 # OS
 .DS_Store
 Thumbs.db
+
+# Telethon session files
+*.session
