@@ -1,0 +1,9 @@
+
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('DB_NAME') }}"
+    schema: raw
+    tables:
+      - name: telegram_messages

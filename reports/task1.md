@@ -7,7 +7,7 @@ The goal of this task was to build a robust data scraping pipeline to extract me
 
 ### 1. Telegram API Setup
 - Registered the application at [my.telegram.org](https://my.telegram.org).
-- Configured Environment Variables in a `.env` file (`API_ID`, `API_HASH`).
+- Configured Environment Variables in a `.env` file (`TELEGRAM_API_ID`, `TELEGRAM_API_HASH`).
 - Implemented **Telethon** library for asynchronous communication with Telegram's MTProto API.
 
 ### 2. Scraping Pipeline (`src/scraper.py`)

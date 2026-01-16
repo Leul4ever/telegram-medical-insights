@@ -24,10 +24,10 @@ telegram-medical-insights/
 ├── medical_warehouse/     # dbt project
 ├── notebooks/             # EDA & prototyping
 ├── tests/                 # Unit tests
-├── scripts/               # Database utilities
+├── scripts/               # Database utilities (Ingestion scripts)
 ├── .env                   # Environment secrets - [Git Ignored]
 ├── .gitignore             # Standard ignore patterns
-├── docker-compose.yml     # Infrastructure orchestration
+├── docker-compose.yml     # Infrastructure (PostgreSQL)
 ├── Dockerfile             # Python environment
 ├── requirements.txt       # Dependencies
 └── README.md              # Project documentation
@@ -37,21 +37,22 @@ telegram-medical-insights/
 
 ## Progress
 
-### Phase 1: Planning & Initialization ✅
+### Phase 1: Repository Setup ✅
 - Defined project architecture and Star Schema design.
 - Initialized directory structure and configuration files.
-- Set up CI/CD workflow for automated testing.
 
 ### Task 1: Data Scraping and Collection ✅
 - **Tool**: Telethon (Telegram API).
-- **Functionality**:
-    - Multi-channel scraping (CheMed123, lobelia4cosmetics, yetenaweg, tikvahpharma).
-    - Metadata extraction (Message ID, Date, Text, Views, Forwards).
-    - Image downloading to channel-specific folders.
-    - Partitioned Data Lake storage (JSON by date).
-- **Security**: 
-    - Session files and credentials protected by `.gitignore`.
-    - Rate limit handling (FloodWait) implemented.
+- **Functionality**: Multi-channel scraping, image downloading, and partitioned JSON storage.
+- **Status**: Completed and verified.
+
+### Task 2: Data Modeling and Transformation ✅
+- **Database**: PostgreSQL (Dockerized on port 5433).
+- **Ingestion**: Custom Python script (`raw_to_postgres.py`) to load JSON data.
+- **Transformation**: **dbt** (Data Build Tool) implementation.
+    - **Staging layer**: Data cleaning and standardization.
+    - **Marts layer**: Star schema with `dim_channels`, `dim_dates`, and `fct_messages`.
+- **Quality**: Built-in and custom dbt tests (13 tests total) passing 100%.
 
 ---
 
@@ -59,7 +60,8 @@ telegram-medical-insights/
 
 ### 1. Prerequisites
 - Python 3.10+
-- Telegram API credentials (`api_id` and `api_hash`) from [my.telegram.org](https://my.telegram.org).
+- Docker Desktop (for PostgreSQL)
+- Telegram API credentials.
 
 ### 2. Installation
 ```powershell
@@ -71,21 +73,21 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-### 3. Configuration
-Create a `.env` file in the root directory:
-```env
-TELEGRAM_API_ID=your_id
-TELEGRAM_API_HASH=your_hash
-DATABASE_URL=postgresql://user:password@localhost:5432/medical_db
+### 3. Database Setup
+```powershell
+docker-compose up -d
+python scripts/raw_to_postgres.py
 ```
 
-### 4. Running the Scraper
+### 4. Running dbt
 ```powershell
-python src/scraper.py
+cd medical_warehouse
+dbt run
+dbt test
 ```
 
 ---
 
 ## Next Steps
-- **Task 2**: Implement Data Modeling and Transformation using dbt.
 - **Task 3**: Integrate YOLOv8 for image enrichment.
+- **Task 4**: Develop FastAPI analytical endpoints.
