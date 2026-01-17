@@ -1,4 +1,4 @@
-# Scaling Medical Insights: Building an End-to-End Data Pipeline for Ethiopian Healthcare
+﻿# Scaling Medical Insights: Building an End-to-End Data Pipeline for Ethiopian Healthcare
 
 ## Executive Summary
 In the rapidly evolving Ethiopian medical market, data is often scattered across informal channels like Telegram. This project establishes a robust, automated data platform for **Kara Solutions** to extract, transform, and analyze this data. By bridging the gap between raw messaging and structured intelligence, we enable data-backed decisions on product trends, market positioning, and engagement strategies.
@@ -151,6 +151,8 @@ graph TD
 ### 4.3 Analytical Service
 **Figure 5: FastAPI Swagger UI Interface**
 The API provides a professional interactive interface for exploring data via the following interactive documentation:
+
+![FastAPI Swagger UI](file:///D:/kifyaAi/telegram-medical-insights/reports/api_docs.png)
 
 *   **Endpoint**: `http://localhost:8001/docs` (Active when the local server is running)
 *   **Feature**: Automated request/response validation and real-time data retrieval.
