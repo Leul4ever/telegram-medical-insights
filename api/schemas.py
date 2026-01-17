@@ -1,15 +1,28 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Any
 from datetime import datetime
 
-class MessageBase(BaseModel):
+class ProductMention(BaseModel):
+    term: str
+    count: int
+
+class ChannelActivity(BaseModel):
+    date: str
+    message_count: int
+
+class MessageSearchResult(BaseModel):
     message_id: int
     channel_name: str
-    message_text: Optional[str] = None
     message_date: datetime
-    view_count: int
-    forward_count: int
+    message_text: Optional[str]
+    view_count: Optional[int]
 
-class Message(MessageBase):
-    class Config:
-        orm_mode = True
+class VisualContentStat(BaseModel):
+    channel_name: str
+    image_count: int
+    promotional_count: int
+    category_distribution: dict
+
+class StandardResponse(BaseModel):
+    status: str
+    data: Any
