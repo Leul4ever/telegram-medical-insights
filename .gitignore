@@ -27,3 +27,8 @@ Thumbs.db
 
 # Telethon session files
 *.session
+
+# Dagster
+.tmp_dagster_home*
+dagster_home/
+storage/
