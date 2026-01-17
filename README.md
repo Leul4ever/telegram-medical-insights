@@ -35,24 +35,24 @@ telegram-medical-insights/
 
 ---
 
-## Progress
+### Task 3: Data Enrichment (YOLOv8) ✅
+- **Logic**: Automated object detection using **YOLOv8** (nano).
+- **Categorization**: Classified 270+ images into `promotional`, `lifestyle`, and `product_display`.
+- **Integration**: Results joined with `fct_messages` for engagement analysis.
 
-### Phase 1: Repository Setup ✅
-- Defined project architecture and Star Schema design.
-- Initialized directory structure and configuration files.
+### Task 4: Analytical API ✅
+- **Framework**: **FastAPI** with Pydantic validation.
+- **Features**: 
+    - Top products reporting.
+    - Channel activity tracking.
+    - Message search.
+    - Visual content statistics.
+- **Documentation**: Interactive UI available at `/docs`.
 
-### Task 1: Data Scraping and Collection ✅
-- **Tool**: Telethon (Telegram API).
-- **Functionality**: Multi-channel scraping, image downloading, and partitioned JSON storage.
-- **Status**: Completed and verified.
-
-### Task 2: Data Modeling and Transformation ✅
-- **Database**: PostgreSQL (Dockerized on port 5433).
-- **Ingestion**: Custom Python script (`raw_to_postgres.py`) to load JSON data.
-- **Transformation**: **dbt** (Data Build Tool) implementation.
-    - **Staging layer**: Data cleaning and standardization.
-    - **Marts layer**: Star schema with `dim_channels`, `dim_dates`, and `fct_messages`.
-- **Quality**: Built-in and custom dbt tests (13 tests total) passing 100%.
+### Task 5: Pipeline Orchestration ✅
+- **Tool**: **Dagster**.
+- **Automation**: Fully automated Job graph combining scraping, loading, detection, and transformation.
+- **Scheduling**: Configured for daily midnight execution.
 
 ---
 
@@ -61,33 +61,37 @@ telegram-medical-insights/
 ### 1. Prerequisites
 - Python 3.10+
 - Docker Desktop (for PostgreSQL)
-- Telegram API credentials.
+- Telegram API credentials in `.env`.
 
 ### 2. Installation
 ```powershell
-# Create virtual environment
-python -m venv venv
-.\venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 3. Database Setup
+### 3. Database & dbt
 ```powershell
 docker-compose up -d
-python scripts/raw_to_postgres.py
+python scripts/run_dbt.py run
 ```
 
-### 4. Running dbt
+### 4. Running the API
 ```powershell
-cd medical_warehouse
-dbt run
-dbt test
+python -m uvicorn api.main:app --port 8001 --reload
+# Visit http://localhost:8001/docs
+```
+
+### 5. Running Orchestration (Dagster)
+```powershell
+dagster dev -f orchestration/definitions.py
+# Visit http://localhost:3000
 ```
 
 ---
 
-## Next Steps
-- **Task 3**: Integrate YOLOv8 for image enrichment.
-- **Task 4**: Develop FastAPI analytical endpoints.
+## Final Reports
+- [Task 1 Report](reports/task1.md)
+- [Task 2 Report](reports/task2.md)
+- [Task 3 Report](reports/task3.md)
+- [Task 4 Report](reports/task4.md)
+- [Task 5 Report](reports/task5.md)
+- [Interim Project Report](reports/interim_report.md)
