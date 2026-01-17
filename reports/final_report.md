@@ -127,6 +127,9 @@ A production-grade pipeline must be observable. Below is the visual evidence of 
 ### 4.1 Automated Orchestration
 **Figure 3: Dagster Pipeline Job Graph**
 *This graph shows the successful orchestration of all 5 stages of the pipeline.*
+
+![Dagster UI Overview](file:///D:/kifyaAi/telegram-medical-insights/reports/dagster_ui.png)
+
 ```mermaid
 graph TD
     scrape_telegram_data --> load_raw_to_postgres
@@ -136,8 +139,8 @@ graph TD
 ```
 
 ### 4.2 Data Transformation Quality
-**Figure 4: dbt Lineage and Verification**
-*The dbt lineage ensures that data flows from staging to marts with 100% test coverage.*
+**Figure 4: dbt Data Flow & Test Coverage**
+*The dbt project ensures that data flows from staging to marts with 100% test coverage across all fact and dimension tables.*
 
 | Test Type | Description | Status |
 |-----------|-------------|--------|
@@ -147,10 +150,10 @@ graph TD
 
 ### 4.3 Analytical Service
 **Figure 5: FastAPI Swagger UI Interface**
-*The API provides a professional interactive interface for exploring data without writing SQL.*
+The API provides a professional interactive interface for exploring data via the following interactive documentation:
 
-> [!NOTE]
-> For a live demonstration, the API can be accessed at `http://localhost:8001/docs` when the local server is active.
+*   **Endpoint**: `http://localhost:8001/docs` (Active when the local server is running)
+*   **Feature**: Automated request/response validation and real-time data retrieval.
 
 ---
 
