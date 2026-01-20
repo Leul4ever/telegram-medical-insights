@@ -14,7 +14,7 @@ select
     m.date_key,
     m.view_count,
     m.forward_count,
-    d.detected_objects,
+    d.detected_objects as detected_class,
     d.confidence_score,
     d.image_category
 from raw_detections d

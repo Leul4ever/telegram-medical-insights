@@ -58,6 +58,10 @@ models:
       - name: message_id
         tests:
           - not_null
+      - name: detected_class
+        description: "Objects detected by YOLO."
+      - name: confidence_score
+        description: "Detection confidence."
       - name: image_category
         tests:
           - accepted_values:
